@@ -1,0 +1,498 @@
+/* =========================================
+   BASIC RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    min-height: 100vh;
+
+    background: #000;
+
+    color: #ffffff;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background-layer {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.30),
+            rgba(0, 0, 0, 0.45)
+        ),
+        url("my-background.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    z-index: -2;
+}
+
+
+
+/* DARK OVERLAY */
+
+.background-layer::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.20);
+
+    z-index: -1;
+}
+
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.challenge-container {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding:
+        60px 30px
+        80px 30px;
+
+}
+
+
+
+/* =========================================
+   TOP LOGO
+========================================= */
+
+.hero-section {
+
+    width: 100%;
+
+    text-align: center;
+
+    padding-bottom: 55px;
+
+}
+
+
+.winter-logo {
+
+    display: block;
+
+    width: auto;
+
+    max-width: 420px;
+
+    max-height: 180px;
+
+    height: auto;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+
+    mix-blend-mode: screen;
+
+}
+
+
+
+/* =========================================
+   DAYS SECTION
+========================================= */
+
+.days-section {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+}
+
+
+
+/* =========================================
+   90 DAY GRID
+========================================= */
+
+.days-grid {
+
+    width: 100%;
+
+    max-width: 1000px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(10, 1fr);
+
+    grid-template-rows:
+        repeat(9, 1fr);
+
+    gap: 8px;
+
+}
+
+
+
+/* =========================================
+   EACH DAY BOX
+========================================= */
+
+.day {
+
+    position: relative;
+
+    aspect-ratio: 1 / 1;
+
+    width: 100%;
+
+    min-width: 0;
+
+    border: 2px solid #ffffff;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.2s ease;
+
+    user-select: none;
+}
+
+
+
+/* =========================================
+   BOX HOVER
+========================================= */
+
+.day:hover {
+
+    transform: scale(1.03);
+
+    z-index: 2;
+
+    box-shadow:
+        0 0 12px
+        rgba(255, 255, 255, 0.45);
+
+}
+
+
+
+/* =========================================
+   COMPLETED BOX
+========================================= */
+
+.day.completed {
+
+    background:
+        rgba(255, 255, 255, 0.45);
+
+    border:
+        2px solid rgba(255, 255, 255, 0.75);
+
+    box-shadow:
+        inset 0 0 15px
+        rgba(0, 0, 0, 0.08);
+
+    cursor: default;
+}
+
+
+
+/* =========================================
+   COMPLETED BOX HOVER
+========================================= */
+
+.day.completed:hover {
+
+    transform: none;
+
+}
+
+
+
+/* =========================================
+   TICK
+========================================= */
+
+.day.completed::after {
+
+    content: "✓";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    font-size:
+        clamp(20px, 2.6vw, 34px);
+
+    font-weight: 800;
+
+    color: #222222;
+
+    text-shadow:
+        0 1px 2px
+        rgba(255, 255, 255, 0.5);
+
+}
+
+
+
+/* =========================================
+   DAY NUMBER
+========================================= */
+
+.day-number {
+
+    font-family:
+        "Arial Black",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size:
+        clamp(11px, 1.4vw, 18px);
+
+    font-weight: 800;
+
+    letter-spacing:
+        0.02em;
+
+    color: #111111;
+
+    line-height: 1;
+
+}
+
+
+
+/* =========================================
+   HIDE NUMBER AFTER COMPLETION
+========================================= */
+
+.day.completed .day-number {
+
+    opacity: 0.28;
+
+}
+
+
+
+/* =========================================
+   GRAPHIC DESIGNERS FOOTER
+========================================= */
+
+.challenge-footer {
+
+    width: 100%;
+
+    text-align: center;
+
+    padding-top: 70px;
+
+    padding-bottom: 40px;
+
+}
+
+
+
+/* =========================================
+   COMMUNITY NAME
+========================================= */
+
+.community-name {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size:
+        clamp(20px, 3vw, 36px);
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.08em;
+
+    color: #ffffff;
+
+    margin-bottom: 30px;
+
+}
+
+
+
+/* =========================================
+   LOGO AREA
+========================================= */
+
+.logo-container {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-height: 90px;
+
+}
+
+
+
+/* =========================================
+   BOTTOM LOGO
+========================================= */
+
+.community-logo {
+
+    display: block;
+
+    max-width: 180px;
+
+    max-height: 100px;
+
+    width: auto;
+
+    height: auto;
+
+    object-fit: contain;
+
+}
+
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .challenge-container {
+
+        padding:
+            35px 12px
+            50px 12px;
+
+    }
+
+
+    .hero-section {
+
+        padding-bottom: 30px;
+
+    }
+
+
+    .days-grid {
+
+        gap: 4px;
+
+    }
+
+
+    .day {
+
+        border-width: 1px;
+
+    }
+
+
+    .community-name {
+
+        margin-bottom: 20px;
+
+    }
+
+}
+
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+    .days-grid {
+
+        gap: 3px;
+
+    }
+
+
+    .challenge-footer {
+
+        padding-top: 45px;
+
+    }
+
+
+    .community-logo {
+
+        max-width: 140px;
+
+        max-height: 80px;
+
+    }
+
+}
