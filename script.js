@@ -1,6 +1,7 @@
 ```javascript
 const daysGrid = document.getElementById("daysGrid");
 
+
 // =========================================
 // LOAD SAVED DAYS
 // =========================================
@@ -10,8 +11,9 @@ let completedDays = JSON.parse(
 ) || [];
 
 
+
 // =========================================
-// CREATE 90 DAY BOXES
+// CREATE 90 BOXES
 // =========================================
 
 for (let day = 1; day <= 90; day++) {
@@ -30,10 +32,12 @@ for (let day = 1; day <= 90; day++) {
 
     dayNumber.textContent = day;
 
+
     dayBox.appendChild(dayNumber);
 
 
-    // CHECK SAVED COMPLETED DAYS
+
+    // ALREADY COMPLETED
     if (completedDays.includes(day)) {
 
         dayBox.classList.add("completed");
@@ -41,16 +45,23 @@ for (let day = 1; day <= 90; day++) {
     }
 
 
-    // CLICK EVENT
-    dayBox.addEventListener("click", function () {
 
-        toggleDay(day, dayBox);
+    // CLICK TO CHECK / UNCHECK
+    dayBox.addEventListener(
+        "click",
+        function () {
 
-    });
+            toggleDay(day, dayBox);
+
+        }
+    );
+
 
 
     daysGrid.appendChild(dayBox);
+
 }
+
 
 
 // =========================================
@@ -63,7 +74,7 @@ function toggleDay(day, element) {
 
 
     // =====================================
-    // ALREADY COMPLETED → UNCHECK
+    // IF ALREADY COMPLETED → UNCHECK
     // =====================================
 
     if (index !== -1) {
@@ -76,26 +87,20 @@ function toggleDay(day, element) {
 
 
     // =====================================
-    // NOT COMPLETED → CHECK
+    // IF NOT COMPLETED → CHECK
     // =====================================
 
     else {
 
-        completedDays.push(day);
+        completeDay(day, element);
 
-        completedDays.sort(function (a, b) {
-
-            return a - b;
-
-        });
-
-        element.classList.add("completed");
+        return;
 
     }
 
 
     // =====================================
-    // SAVE TO LOCAL STORAGE
+    // SAVE AFTER UNCHECK
     // =====================================
 
     localStorage.setItem(
@@ -103,22 +108,53 @@ function toggleDay(day, element) {
         JSON.stringify(completedDays)
     );
 
+}
 
-    // =====================================
-    // ALL 90 DAYS COMPLETED
-    // =====================================
 
+
+// =========================================
+// COMPLETE DAY
+// =========================================
+
+function completeDay(day, element) {
+
+    // Add day
+    completedDays.push(day);
+
+
+    // Keep days in order
+    completedDays.sort(
+        (a, b) => a - b
+    );
+
+
+    // Add completed style
+    element.classList.add("completed");
+
+
+    // SAVE
+    localStorage.setItem(
+        "90DayChallengeCompleted",
+        JSON.stringify(completedDays)
+    );
+
+
+
+    // ALL 90 COMPLETED
     if (completedDays.length === 90) {
 
-        setTimeout(function () {
+        setTimeout(
+            function () {
 
-            alert(
-                "🎉 Congratulations! You completed all 90 days!"
-            );
+                alert(
+                    "🎉 Congratulations! You completed all 90 days!"
+                );
 
-        }, 150);
+            },
+            150
+        );
 
     }
 
 }
-
+```
