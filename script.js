@@ -1,4 +1,3 @@
-```javascript
 const daysGrid = document.getElementById("daysGrid");
 
 
@@ -157,4 +156,3 @@ function completeDay(day, element) {
     }
 
 }
-```
